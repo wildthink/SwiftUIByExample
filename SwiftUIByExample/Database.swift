@@ -4,9 +4,7 @@
 //
 //  Created by Jason Jobe on 9/3/21.
 //
-
-import SwiftUI
-import CoreData
+import Foundation
 
 public protocol Queryable {
     associatedtype Filter: QueryFilter
@@ -20,6 +18,15 @@ public protocol QueryFilter: Equatable {
 
 public struct FetchRequest<ResultType> {
     
+    var entity: String = "<entity>"
+    var resultType: ResultType.Type { ResultType.self }
+    
+    var predicate: NSPredicate?
+    var sorts: NSSortDescriptor?
+    
+    var fetchLimit: Int = 0
+    var batchSize: Int = 0
+    var fetchOffset: Int = 0
 }
 
 public struct QueryResults<T: Queryable>: RandomAccessCollection {
@@ -35,7 +42,7 @@ public struct QueryResults<T: Queryable>: RandomAccessCollection {
     
     public subscript(position: Int) -> T {
         let object = results.object(at: position) as! T.Filter.ResultType
-        return T(result: object)
+        return (object as? T) ?? T(result: object)
     }
 }
 
@@ -69,14 +76,15 @@ extension Query {
         var filter: T.Filter?
 
         func executeQuery(dataStore: DataStore, filter: T.Filter) {
-            print (#function, dataStore.name)
+//            print (#function, dataStore.name)
+            fetchIfNecessary()
 //            let fetchRequest = filter.fetchRequest(dataStore)
 //            let context = dataStore.viewContext
             
             // you MUST leave this as an NSArray
 //            let results: NSArray = (try? context.fetch(fetchRequest)) ?? NSArray()
-            let results = NSArray()
-            self.results = QueryResults(results: results)
+//            let results = NSArray()
+//            self.results = QueryResults(results: results)
         }
         
         func fetchIfNecessary() {
@@ -87,6 +95,8 @@ extension Query {
                 fatalError("Attempting to execute a @Query without a filter")
             }
             
+//            print (#function, ds.name)
+
             let shouldFetch = true
             
 //            let request = f.fetchRequest(ds)
@@ -101,6 +111,8 @@ extension Query {
     }
 }
 
+#if canImport(SwiftUI)
+import SwiftUI
 
 @propertyWrapper
 public struct Query<T: Queryable>: DynamicProperty {
@@ -117,19 +129,24 @@ public struct Query<T: Queryable>: DynamicProperty {
     
     // Does this need to be `mutating`
     public func update() {
-        core.executeQuery(dataStore: dataStore, filter: baseFilter)
+        if core.dataStore == nil { core.dataStore = dataStore }
+        if core.filter == nil { core.filter = baseFilter }
+        core.fetchIfNecessary()
+//        core.executeQuery(dataStore: dataStore, filter: baseFilter)
     }
     
-    public var projectedValue: Binding<T.Filter> {
-//        return Binding(get: { $core.filter ?? baseFilter as! T.Filter },
-        return Binding(get: { $core.filter as! T.Filter },
-                       set: {
-            if core.filter != $0 {
-                core.objectWillChange.send()
-                core.filter = $0
-            }
-        })
+    public var projectedValue: Self {
+        self
     }
 
+    public func mutate(_ ndx: Int, fn: (inout T) -> Void) {
+        core.objectWillChange.send()
+        var nob = core.results[ndx]
+        fn(&nob)
+//        print (nob)
+        let key = "\(type(of: nob)).Type"
+        dataStore.datasets[key]?[ndx] = nob
+    }
 }
+#endif
 

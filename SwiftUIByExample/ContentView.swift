@@ -6,7 +6,7 @@ struct Item: Identifiable {
     var _value: Int
     var value: Int {
         get {
-            print("get_v \(id)")
+//            print("get_v \(id)")
             return _value
         }
         set { _value = newValue }
@@ -17,8 +17,8 @@ extension Item: Queryable {
     typealias Filter = ItemFilter
 
     init(result: ItemFilter.ResultType) {
-        id = 0
-        _value = 23
+        id = result.id
+        _value = result._value
     }
 }
 
@@ -64,15 +64,15 @@ struct PlaceView: View {
     }
 }
 
-class Model: ObservableObject {
-    var items: [Item] = (1...500_000).map { Item(id: $0, _value: $0) }
-    
-    func update(_ id: Int) {
-        objectWillChange.send()
-        items[id].value += 5
-        items[items.count - id - 1].value += 5
-    }
-}
+//class Model: ObservableObject {
+//    var items: [Item] = (1...500_000).map { Item(id: $0, _value: $0) }
+//    
+//    func update(_ id: Int) {
+//        objectWillChange.send()
+//        items[id].value += 5
+//        items[items.count - id - 1].value += 5
+//    }
+//}
 
 struct SampleRow: View {
     let item: Item
@@ -98,30 +98,37 @@ struct SampleRow: View {
 
 struct ContentView: View {
     @Feature(\.isDebugMenuEnabled) var showDebugMenu
-    @Query(.all) var contacts: QueryResults<Item>
+    @Query(.all) var items: QueryResults<Item>
 
-    @ObservedObject var model: Model
+//    @ObservedObject var model: Model
     
     var body: some View {
         VStack {
             Button ("Update") {
-                model.update(1)
+                $items.mutate(0) {
+                    $0.value += 100
+                }
             }
             ScrollView {
                 LazyVStack {
-                    ForEach(model.items) { item in
+                    ForEach(items) { item in
                         SampleRow(item: item)
+                            .onTapGesture {
+                                $items.mutate(item.id - 1) {
+                                    $0.value += 100
+                                }
+                            }
                     }
                 }
                 .onAppear(perform: {
                     self.reload()
                 })
-                .onReceive(model.objectWillChange, perform: { _ in
-                    self.reload()
-                })
+//                .onReceive(model.objectWillChange, perform: { _ in
+//                    self.reload()
+//                })
         }
         }
-        .frame(height: 300)
+//        .frame(height: 300)
     }
     
     private func reload() {
