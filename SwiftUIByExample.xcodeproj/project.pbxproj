@@ -10,6 +10,7 @@
 		518EAA99264EE37A00B057E5 /* SwiftUIByExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518EAA98264EE37A00B057E5 /* SwiftUIByExampleApp.swift */; };
 		518EAA9B264EE37A00B057E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518EAA9A264EE37A00B057E5 /* ContentView.swift */; };
 		518EAA9D264EE37B00B057E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 518EAA9C264EE37B00B057E5 /* Assets.xcassets */; };
+		9605EE5326E2619500F65E67 /* FlakeMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9605EE5226E2619500F65E67 /* FlakeMaker.swift */; };
 		967503A926E1CCED00B9A819 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967503A826E1CCED00B9A819 /* Feature.swift */; };
 		967503AB26E1CDAC00B9A819 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967503AA26E1CDAC00B9A819 /* Database.swift */; };
 		96C075C726D4241F00B856AA /* CoreCQI in Frameworks */ = {isa = PBXBuildFile; productRef = 96C075C626D4241F00B856AA /* CoreCQI */; };
@@ -21,6 +22,7 @@
 		518EAA9A264EE37A00B057E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		518EAA9C264EE37B00B057E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		518EAAA1264EE37B00B057E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9605EE5226E2619500F65E67 /* FlakeMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlakeMaker.swift; sourceTree = "<group>"; };
 		967503A826E1CCED00B9A819 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		967503AA26E1CDAC00B9A819 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		96C075C826D4259000B856AA /* CoreCQI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CoreCQI; path = ../../../Development/frameworks/CoreCQI; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				518EAA98264EE37A00B057E5 /* SwiftUIByExampleApp.swift */,
 				967503A826E1CCED00B9A819 /* Feature.swift */,
 				967503AA26E1CDAC00B9A819 /* Database.swift */,
+				9605EE5226E2619500F65E67 /* FlakeMaker.swift */,
 				518EAA9A264EE37A00B057E5 /* ContentView.swift */,
 				518EAA9C264EE37B00B057E5 /* Assets.xcassets */,
 				518EAAA1264EE37B00B057E5 /* Info.plist */,
@@ -145,6 +148,7 @@
 				967503A926E1CCED00B9A819 /* Feature.swift in Sources */,
 				518EAA9B264EE37A00B057E5 /* ContentView.swift in Sources */,
 				967503AB26E1CDAC00B9A819 /* Database.swift in Sources */,
+				9605EE5326E2619500F65E67 /* FlakeMaker.swift in Sources */,
 				518EAA99264EE37A00B057E5 /* SwiftUIByExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

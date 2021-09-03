@@ -6,6 +6,44 @@
 //
 import Foundation
 
+public protocol Entity {
+    static var entityType: EntityType { get }
+    var id: Int64 { get }
+}
+
+
+public struct EntityType: Equatable, ExpressibleByStringLiteral {
+    var value: String
+    
+    public init(stringLiteral value: String) {
+        self.value = value
+    }
+    public init(_ value: String) {
+        self.value = value
+    }
+    public init(_ etype: Any.Type) {
+        self.value = String(describing: etype)
+    }
+}
+
+public extension Entity {
+    static var entityType: EntityType { EntityType(Self.self) }
+}
+
+extension Entity where Self: CustomStringConvertible {
+    var description: String {
+        return "\(Self.entityType)[\(id)]"
+    }
+}
+
+public typealias DBEntity = (Entity & Identifiable & CustomStringConvertible)
+
+//struct Bluto: DBEntity {
+//    var id: Int64
+//    var value: Int64
+//    var others: [Entity] = []
+//}
+
 public protocol Queryable {
     associatedtype Filter: QueryFilter
     init(result: Filter.ResultType)
@@ -30,6 +68,8 @@ public struct FetchRequest<ResultType> {
 }
 
 public struct QueryResults<T: Queryable>: RandomAccessCollection {
+    // Use of the explicit NSArray provides a compatability for
+    // CoreData to provide a lazy NSArray
     private let results: NSArray
     
     internal init(results: NSArray = NSArray()) {
@@ -46,14 +86,19 @@ public struct QueryResults<T: Queryable>: RandomAccessCollection {
     }
 }
 
-public struct Filter {
-    
-}
+//public struct Filter {
+//    
+//}
 
 
 public class DataStore: ObservableObject {
     var name: String = "Dave's Store"
+    var id: Int64
     var datasets: [String: [Any]] = [:]
+
+    init() {
+        self.id = Thread.main.nextFlakeID()
+    }
     
     func fetch<Q: QueryFilter>(filter: Q) -> [Q.ResultType] {
         let key = "\(type(of: Q.ResultType.self))"

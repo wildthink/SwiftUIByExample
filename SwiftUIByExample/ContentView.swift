@@ -99,8 +99,6 @@ struct SampleRow: View {
 struct ContentView: View {
     @Feature(\.isDebugMenuEnabled) var showDebugMenu
     @Query(.all) var items: QueryResults<Item>
-
-//    @ObservedObject var model: Model
     
     var body: some View {
         VStack {
@@ -123,12 +121,8 @@ struct ContentView: View {
                 .onAppear(perform: {
                     self.reload()
                 })
-//                .onReceive(model.objectWillChange, perform: { _ in
-//                    self.reload()
-//                })
         }
         }
-//        .frame(height: 300)
     }
     
     private func reload() {
