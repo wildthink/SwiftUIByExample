@@ -1,4 +1,5 @@
 import SwiftUI
+//import CoreData
 
 struct Item: Identifiable {
     var id: Int
@@ -9,6 +10,27 @@ struct Item: Identifiable {
             return _value
         }
         set { _value = newValue }
+    }
+}
+
+extension Item: Queryable {
+    typealias Filter = ItemFilter
+
+    init(result: ItemFilter.ResultType) {
+        id = 0
+        _value = 23
+    }
+}
+
+struct ItemFilter: QueryFilter {
+    typealias ResultType = Item
+    static let all = ItemFilter()
+    
+    func fetchRequest(_ dataStore: DataStore) -> FetchRequest<ResultType> {
+//        let f = NSManagedObject.fetchRequest() as NSFetchRequest<NSManagedObject>
+//        f.predicate = NSPredicate(value: true)
+//        f.sortDescriptors = [NSSortDescriptor(key: "givenName", ascending: true)]
+        return FetchRequest()
     }
 }
 
@@ -72,7 +94,12 @@ struct SampleRow: View {
     }
 }
 
+// https://github.com/onmyway133/blog/issues/468
+
 struct ContentView: View {
+    @Feature(\.isDebugMenuEnabled) var showDebugMenu
+    @Query(.all) var contacts: QueryResults<Item>
+
     @ObservedObject var model: Model
     
     var body: some View {
@@ -86,8 +113,18 @@ struct ContentView: View {
                         SampleRow(item: item)
                     }
                 }
+                .onAppear(perform: {
+                    self.reload()
+                })
+                .onReceive(model.objectWillChange, perform: { _ in
+                    self.reload()
+                })
         }
         }
         .frame(height: 300)
     }
+    
+    private func reload() {
+    }
+
 }

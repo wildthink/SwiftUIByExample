@@ -3,13 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		518EAA99264EE37A00B057E5 /* SwiftUIByExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518EAA98264EE37A00B057E5 /* SwiftUIByExampleApp.swift */; };
 		518EAA9B264EE37A00B057E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518EAA9A264EE37A00B057E5 /* ContentView.swift */; };
 		518EAA9D264EE37B00B057E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 518EAA9C264EE37B00B057E5 /* Assets.xcassets */; };
+		967503A926E1CCED00B9A819 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967503A826E1CCED00B9A819 /* Feature.swift */; };
+		967503AB26E1CDAC00B9A819 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967503AA26E1CDAC00B9A819 /* Database.swift */; };
+		96C075C726D4241F00B856AA /* CoreCQI in Frameworks */ = {isa = PBXBuildFile; productRef = 96C075C626D4241F00B856AA /* CoreCQI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +21,9 @@
 		518EAA9A264EE37A00B057E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		518EAA9C264EE37B00B057E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		518EAAA1264EE37B00B057E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		967503A826E1CCED00B9A819 /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
+		967503AA26E1CDAC00B9A819 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		96C075C826D4259000B856AA /* CoreCQI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CoreCQI; path = ../../../Development/frameworks/CoreCQI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96C075C726D4241F00B856AA /* CoreCQI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,9 +58,12 @@
 			isa = PBXGroup;
 			children = (
 				518EAA98264EE37A00B057E5 /* SwiftUIByExampleApp.swift */,
+				967503A826E1CCED00B9A819 /* Feature.swift */,
+				967503AA26E1CDAC00B9A819 /* Database.swift */,
 				518EAA9A264EE37A00B057E5 /* ContentView.swift */,
 				518EAA9C264EE37B00B057E5 /* Assets.xcassets */,
 				518EAAA1264EE37B00B057E5 /* Info.plist */,
+				96C075C826D4259000B856AA /* CoreCQI */,
 			);
 			path = SwiftUIByExample;
 			sourceTree = "<group>";
@@ -74,6 +84,9 @@
 			dependencies = (
 			);
 			name = SwiftUIByExample;
+			packageProductDependencies = (
+				96C075C626D4241F00B856AA /* CoreCQI */,
+			);
 			productName = SwiftUIByExample;
 			productReference = 518EAA95264EE37A00B057E5 /* SwiftUIByExample.app */;
 			productType = "com.apple.product-type.application";
@@ -101,6 +114,9 @@
 				Base,
 			);
 			mainGroup = 518EAA8C264EE37A00B057E5;
+			packageReferences = (
+				96C075C526D4241F00B856AA /* XCRemoteSwiftPackageReference "CoreCQI" */,
+			);
 			productRefGroup = 518EAA96264EE37A00B057E5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -126,7 +142,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				967503A926E1CCED00B9A819 /* Feature.swift in Sources */,
 				518EAA9B264EE37A00B057E5 /* ContentView.swift in Sources */,
+				967503AB26E1CDAC00B9A819 /* Database.swift in Sources */,
 				518EAA99264EE37A00B057E5 /* SwiftUIByExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,7 +274,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8S7Y6KVRU5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SwiftUIByExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -276,7 +294,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8S7Y6KVRU5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SwiftUIByExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -312,6 +330,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		96C075C526D4241F00B856AA /* XCRemoteSwiftPackageReference "CoreCQI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wildthink/CoreCQI.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		96C075C626D4241F00B856AA /* CoreCQI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96C075C526D4241F00B856AA /* XCRemoteSwiftPackageReference "CoreCQI" */;
+			productName = CoreCQI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 518EAA8D264EE37A00B057E5 /* Project object */;
 }
